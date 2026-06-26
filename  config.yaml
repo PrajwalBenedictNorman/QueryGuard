@@ -1,1 +1,37 @@
 
+server:
+  port: 8000
+
+metrics:
+  cusum:
+    k: 5.0
+    h: 25.0
+    mean: 50.0
+    variance: 100.0
+
+  ewma:
+    lambda: 0.2
+    std_dev: 10.0
+    mean: 50.0
+    threshold: 3.0
+
+target:
+  url: ""
+  method : "POST"
+
+request:
+  headers:
+    Authorization: "Bearer ${API_KEY}"
+  body:
+    message: "{{query}}"
+    session_id: "123"
+response:
+  path: "$.data.response"
+
+baseline:
+  model: "gemini-embedding-2"
+  threshold: 0.75
+  store: "./baseline_embedding.json"
+
+cache:
+  size: 30
