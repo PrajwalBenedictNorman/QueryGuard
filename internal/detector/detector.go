@@ -5,8 +5,8 @@ import (
 )
 
 type Detector struct{
-	cusum CusumDetector
-	ewma EwmaDetector
+	Cusum CusumDetector
+	Ewma EwmaDetector
 	CusumValue float64
 	CusumAlert bool
 	EwmaValue float64
@@ -22,7 +22,7 @@ type result struct {
 
  func (d *Detector) CusumResult(value float64,wg *sync.WaitGroup,ch chan result ){
 
-	score,alert := d.cusum.CusumUpdate(value)
+	score,alert := d.Cusum.CusumUpdate(value)
 	ch <- result{score: score,alert: alert,methodName: "cusum"}
 	wg.Done()
 }	
@@ -30,7 +30,7 @@ type result struct {
 
 func (d *Detector) EwmaResult(value float64 ,wg *sync.WaitGroup,ch chan result){
 
-	score,alert := d.ewma.EwmaUpdate(value)
+	score,alert := d.Ewma.EwmaUpdate(value)
 	ch <- result{score: score,alert: alert,methodName: "ewma"}
 	wg.Done()
 }

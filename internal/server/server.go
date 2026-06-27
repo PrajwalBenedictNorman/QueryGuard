@@ -6,6 +6,9 @@ import (
 	"QueryGuard/internal/detector"
 	"QueryGuard/internal/extractor"
 	"QueryGuard/internal/metrics"
+	"fmt"
+	"log"
+	"net/http"
 )
 
 type Server struct{
@@ -32,6 +35,11 @@ func New(
 	}
 }
 
-func (s *Server) Start(){
-	
+func (s *Server) Start() {
+	s.registerRoutes()
+	port := fmt.Sprintf(":%d", s.Config.Server.Port)
+	log.Printf("QueryGuard started on %s", port)
+	if err := http.ListenAndServe(port, nil); err != nil {
+		log.Fatal(err)
+	}
 }
