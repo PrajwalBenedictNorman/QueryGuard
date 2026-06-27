@@ -10,6 +10,12 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
+type RequestBody struct {
+    Message   string `yaml:"message"`
+    SessionId string `yaml:"session_id"`
+}
+
+
 type Config struct{
 		Server struct{
 			Port int `yaml:"port"`
@@ -34,10 +40,7 @@ type Config struct{
 		}`yaml:"target"`
 		Request struct{
 			Header  map[string]string `yaml:"header"`
-			Body struct {
-				Message string `yaml:"message"`
-				SessionId string `yaml:"session_id"`
-			}`yaml:"body"`
+			Body RequestBody `yaml:"body"`
 		}`yaml:"request"`
 		Response struct{
 				Path string `yaml:"path"`
