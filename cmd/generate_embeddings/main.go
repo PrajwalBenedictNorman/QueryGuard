@@ -12,7 +12,7 @@ import (
 
 func embeddingCreate(q string) []float64{
 	ctx :=context.Background()
-	client,err:=genai.NewClient(ctx, &genai.ClientConfig{APIKey: "",Backend: genai.BackendGeminiAPI})
+	client,err:=genai.NewClient(ctx, &genai.ClientConfig{APIKey:os.Getenv("GEMINI_API_KEY"),Backend: genai.BackendGeminiAPI})
 	if err != nil {
         log.Fatal(err)
     }
@@ -87,6 +87,9 @@ func main(){
         "embedding": baseline,
     }, "", "  ")
     
-    os.WriteFile("../../baseline_embedding.json", data, 0644)
+    err :=os.WriteFile("/Users/prajwal/Desktop/projects/QueryGuard/baseline_embedding.json", data, 0644)
+    if err != nil {
+    log.Fatal("File save failed:", err)
+    }
     fmt.Println("Baseline saved!")
 }

@@ -1,23 +1,22 @@
-
 server:
   port: 8000
 
 metrics:
   cusum:
-    k: 5.0
-    h: 25.0
-    mean: 50.0
-    variance: 100.0
+    k: 0.05
+    h: 0.1
+    mean: 0.82
+    variance: 0.01
 
   ewma:
     lambda: 0.2
-    std_dev: 10.0
-    mean: 50.0
-    threshold: 3.0
+    std_dev: 0.08
+    mean: 0.82
+    threshold: 1.5
 
 target:
   url: ""
-  method : "POST"
+  method: "POST"
 
 request:
   headers:
@@ -25,8 +24,9 @@ request:
   body:
     message: "{{query}}"
     session_id: "123"
+
 response:
-  path: "$.data.response"
+  path: "$.origin"
 
 baseline:
   model: "gemini-embedding-2"

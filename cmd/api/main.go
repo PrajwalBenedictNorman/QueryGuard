@@ -42,6 +42,6 @@ func main(){
     m := metrics.NewMetrics(reg)
     a := adapter.NewAdapter(cfg)
 
-    s := server.New(cfg, ext, det, m, a)
+    s := server.New(cfg, ext, det, m, a,reg)
     s.Start()
 }

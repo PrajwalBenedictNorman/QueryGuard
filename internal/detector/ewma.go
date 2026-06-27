@@ -14,5 +14,9 @@ type EwmaDetector struct {
 func (e *EwmaDetector)EwmaUpdate(value float64) (float64,bool){
 	e.Current = (e.Lambda *value) + (e.Current*(1-e.Lambda))
 	deviation :=math.Abs(e.Current-e.Mean)/e.StdDev
+	if deviation > e.Threshold {
+        e.Current = e.Mean  
+        return e.Current, true
+    }
 	return e.Current,deviation>e.Threshold
 }

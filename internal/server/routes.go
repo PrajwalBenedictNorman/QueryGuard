@@ -20,7 +20,7 @@ type QueryResponse struct {
 
 func (s *Server) registerRoutes() {
 	http.HandleFunc("/query", s.handleQuery)
-	http.Handle("/metrics", promhttp.Handler())
+	http.Handle("/metrics", promhttp.HandlerFor(s.Registry, promhttp.HandlerOpts{}))
 }
 
 func (s *Server) handleQuery(w http.ResponseWriter, r *http.Request) {

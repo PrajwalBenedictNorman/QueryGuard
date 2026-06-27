@@ -6,6 +6,7 @@ import (
 	"QueryGuard/internal/detector"
 	"QueryGuard/internal/extractor"
 	"QueryGuard/internal/metrics"
+	"github.com/prometheus/client_golang/prometheus"
 	"fmt"
 	"log"
 	"net/http"
@@ -17,6 +18,7 @@ type Server struct{
 	Detector  *detector.Detector
     Metrics   *metrics.Metrics
     Adapter   *adapter.Adapter
+	Registry  *prometheus.Registry
 }
 
 func New(
@@ -25,6 +27,7 @@ func New(
     det *detector.Detector,
     m *metrics.Metrics,
     a *adapter.Adapter,
+	reg *prometheus.Registry,
 ) *Server{
 	return &Server{
 		Config: cfg,
@@ -32,6 +35,7 @@ func New(
 		Detector: det,
 		Metrics: m,
 		Adapter: a,
+		Registry: reg,
 	}
 }
 

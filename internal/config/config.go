@@ -6,7 +6,6 @@ import (
 	"log"
 	"os"
 	"strings"
-
 	"gopkg.in/yaml.v3"
 )
 
@@ -58,7 +57,9 @@ type Config struct{
 }
 
 func Load() (*Config,error){
-	data,err :=os.ReadFile("config.yaml")
+	dir, _ := os.Getwd()
+	fmt.Println("Looking for config at:", dir+"/config.yaml")
+	data,err :=os.ReadFile(dir+"/config.yaml")
 	if err !=nil{
 		log.Fatal("No config file found")
 		return  nil,err
